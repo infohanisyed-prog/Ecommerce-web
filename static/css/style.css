@@ -219,11 +219,7 @@ a {
     height: 190px;
     right: 7%;
     bottom: 65px;
-    z-index: 2;
-    .hero-watch {
-    outline: 3px solid red !important;
-    background: yellow !important;
-}
+    z-index: 4;
 }
 
 /* FEATURED PRODUCTS */
