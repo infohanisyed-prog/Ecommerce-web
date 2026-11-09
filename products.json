@@ -1,0 +1,189 @@
+[
+{
+  "model": "store.product",
+  "pk": 1,
+  "fields": {
+    "name": "wireless Earbuds",
+    "price": "4899.00",
+    "description": "Enjoy crystal-clear sound and seamless wireless connectivity wherever you go.",
+    "image": "products/Earbuds.png",
+    "category": "electronics"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 2,
+  "fields": {
+    "name": "iphone 13",
+    "price": "179999.00",
+    "description": "Latest Smartphone with amazing Features.",
+    "image": "products/smartphone_DL2bh92.png",
+    "category": "electronics"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 3,
+  "fields": {
+    "name": "Headphones",
+    "price": "4000.00",
+    "description": "Enjoy High Quality Sound.",
+    "image": "products/headphones.png",
+    "category": "electronics"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 4,
+  "fields": {
+    "name": "Smart Watch",
+    "price": "5049.00",
+    "description": "Track your Daily Activities.",
+    "image": "products/Smartwatch.png",
+    "category": "electronics"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 5,
+  "fields": {
+    "name": "Bluetooth Speaker",
+    "price": "3599.00",
+    "description": "Experience powerful sound and enjoy your favorite music anytime, anywhere.",
+    "image": "products/Bluetooth_Speaker_0D9lPpo.png",
+    "category": "electronics"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 6,
+  "fields": {
+    "name": "Digital Camera",
+    "price": "65000.00",
+    "description": "Capture stunning photos and memorable moments with exceptional image quality.",
+    "image": "products/Digitalcamera.png",
+    "category": "electronics"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 7,
+  "fields": {
+    "name": "Power Bank",
+    "price": "4000.00",
+    "description": "Portable charging solution for compatible devices.",
+    "image": "products/PowerBank.png",
+    "category": "electronics"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 8,
+  "fields": {
+    "name": "Casual Sweatshirt",
+    "price": "2200.00",
+    "description": "Comfortable everyday sweatshirt.",
+    "image": "products/Sweat_Shirt.png",
+    "category": "fashion"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 9,
+  "fields": {
+    "name": "Casual Sneakers",
+    "price": "4500.00",
+    "description": "Versatile shoes for everyday outfits.",
+    "image": "products/Sneakers.png",
+    "category": "fashion"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 10,
+  "fields": {
+    "name": "Stylish Handbag",
+    "price": "3000.00",
+    "description": "Everyday handbag with a spacious interior.",
+    "image": "products/HandBag.png",
+    "category": "fashion"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 11,
+  "fields": {
+    "name": "Knitted Cardigan",
+    "price": "2800.00",
+    "description": "Lightweight layering piece for casual outfits.",
+    "image": "products/Sweater.png",
+    "category": "fashion"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 12,
+  "fields": {
+    "name": "Jacket",
+    "price": "3800.00",
+    "description": "Classic jacket for casual styling",
+    "image": "products/Jacket.png",
+    "category": "fashion"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 13,
+  "fields": {
+    "name": "Elegant Earrings",
+    "price": "800.00",
+    "description": "Minimal everyday earrings with a stylish finish.",
+    "image": "products/Earrings.png",
+    "category": "accessories"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 14,
+  "fields": {
+    "name": "Classic Wrist Watch",
+    "price": "2000.00",
+    "description": "Simple and elegant design for daily wear.",
+    "image": "products/Watch.png",
+    "category": "accessories"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 15,
+  "fields": {
+    "name": "Sun Glasses",
+    "price": "1200.00",
+    "description": "Stylish sunglasses for outdoor use.",
+    "image": "products/Glasses.png",
+    "category": "accessories"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 16,
+  "fields": {
+    "name": "Minimalist Wallet",
+    "price": "1000.00",
+    "description": "Compact wallet for cards and cash.",
+    "image": "products/Wallet.png",
+    "category": "accessories"
+  }
+},
+{
+  "model": "store.product",
+  "pk": 17,
+  "fields": {
+    "name": "Elegant Bracelet",
+    "price": "900.00",
+    "description": "Simple bracelet for everyday styling.",
+    "image": "products/Bracelet.png",
+    "category": "fashion"
+  }
+}
+]
