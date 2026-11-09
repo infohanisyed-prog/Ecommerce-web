@@ -377,8 +377,12 @@ footer {
     }
 
     .hero-watch {
-        height: 130px;
-    }
+    width: 27%;
+    height: 130px;
+    right: 7%;
+    bottom: 45px;
+    z-index: 4;
+}
 
     .product-container {
         grid-template-columns: 1fr;
