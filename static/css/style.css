@@ -180,9 +180,9 @@ a {
     position: absolute;
     object-fit: contain;
     background: transparent;
-    mix-blend-mode: multiply;
-    filter: drop-shadow(0 8px 10px rgba(0,0,0,0.12));
     mix-blend-mode: normal;
+    filter: drop-shadow(0 8px 10px rgba(0,0,0,0.12));
+    
 }
 
 .hero-stage::after {
