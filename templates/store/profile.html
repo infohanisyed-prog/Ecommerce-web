@@ -1,0 +1,132 @@
+
+{% extends 'store/base.html' %}
+
+{% block title %}My Profile | NEXORA{% endblock %}
+
+{% block content %}
+
+<section class="profile-section">
+
+    <div class="profile-container">
+
+        <div class="profile-heading">
+
+            <div class="profile-avatar">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="35" height="35"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.6"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M5 21v-2a7 7 0 0 1 14 0v2"/>
+                </svg>
+            </div>
+
+            <h1>My Profile</h1>
+            <p>Manage your NEXORA account information</p>
+
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="profile-message">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+        {% if edit_mode %}
+
+            <!-- EDIT PROFILE FORM -->
+
+            <form method="POST" class="profile-form">
+
+                {% csrf_token %}
+
+                <div class="profile-field">
+
+                    <label for="{{ form.username.id_for_label }}">
+                        Username
+                    </label>
+
+                    {{ form.username }}
+
+                    {% for error in form.username.errors %}
+                        <p class="profile-error">{{ error }}</p>
+                    {% endfor %}
+
+                </div>
+
+                <div class="profile-field">
+
+                    <label for="{{ form.email.id_for_label }}">
+                        Email Address
+                    </label>
+
+                    {{ form.email }}
+
+                    {% for error in form.email.errors %}
+                        <p class="profile-error">{{ error }}</p>
+                    {% endfor %}
+
+                </div>
+
+                <div class="profile-actions">
+
+                    <button type="submit" class="profile-save-btn">
+                        Save Changes
+                    </button>
+
+                    <a href="{% url 'profile' %}"
+                       class="profile-cancel-btn">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+
+        {% else %}
+
+            <!-- NORMAL PROFILE VIEW -->
+
+            <div class="profile-details">
+
+                <div class="profile-detail-item">
+                    <span>Username</span>
+                    <h3>{{ user.username }}</h3>
+                </div>
+
+                <div class="profile-detail-item">
+                    <span>Email Address</span>
+                    <h3>{{ user.email|default:"Not added yet" }}</h3>
+                </div>
+
+                <div class="profile-detail-item">
+                    <span>Member Since</span>
+                    <h3>{{ user.date_joined|date:"F d, Y" }}</h3>
+                </div>
+
+            </div>
+
+            <div class="profile-actions">
+
+                <a href="{% url 'profile' %}?edit=1"
+                   class="profile-save-btn">
+                    Edit Profile
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

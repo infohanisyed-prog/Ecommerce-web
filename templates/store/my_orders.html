@@ -1,0 +1,76 @@
+
+{% extends 'store/base.html' %}
+
+{% block content %}
+
+<div class="orders-container">
+
+    <h1>My Orders</h1>
+    <p class="orders-subtitle">View all your previous and current orders.</p>
+
+    {% if orders %}
+
+        {% for order in orders %}
+
+            <div class="order-card">
+
+                <div class="order-header">
+                    <h3>Order #{{ order.id }}</h3>
+                    <span class="order-status">{{ order.status }}</span>
+                </div>
+
+                <p><strong>Order Date:</strong> {{ order.created_at|date:"d M Y, h:i A" }}</p>
+<div class="order-products">
+
+    <h4>Products</h4>
+
+    {% for item in order.items.all %}
+
+        <div class="order-product-item">
+
+            <div class="order-product-details">
+
+                <div class="order-product-image">
+                    <img src="{{ item.product.image.url }}"
+                         alt="{{ item.product.name }}">
+                </div>
+
+                <div class="order-product-info">
+                    <strong>{{ item.product.name }}</strong>
+                    <span>Quantity: {{ item.quantity }}</span>
+                </div>
+
+            </div>
+
+            <div class="order-product-price">
+                Rs. {{ item.price }}
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+                <div class="order-total">
+                    <strong>Total Amount:</strong>
+                    <strong>Rs. {{ order.total_amount }}</strong>
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty-orders">
+            <h3>No Orders Yet!</h3>
+            <p>You haven't placed any orders yet.</p>
+            <a href="{% url 'home' %}">Continue Shopping</a>
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

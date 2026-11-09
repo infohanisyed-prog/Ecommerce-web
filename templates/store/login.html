@@ -1,0 +1,34 @@
+
+{% extends 'store/base.html' %}
+
+{% block title %}Login | NEXORA{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-container">
+
+        <h1>Welcome Back!</h1>
+        <p class="auth-subtitle">Login to your NEXORA account.</p>
+
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="auth-btn">
+                Login
+            </button>
+        </form>
+
+        <p class="auth-switch">
+            Don't have an account?
+            <a href="{% url 'signup' %}">Create Account</a>
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,146 @@
+
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}
+Home | NEXORA
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="deal-label">☆ Best Products</span>
+
+        <h1 class="hero-title">Welcome to <span>Our Store!</span> </h1>
+
+        <p>
+            Discover amazing products at affordable prices.
+            <br>
+            Shop smart, live better!
+        </p>
+
+        <a href="#products" class="shop-btn">
+             Shop Now →
+        </a>
+
+    </div>
+
+    
+<div class="hero-image">
+    <div class="hero-stage">
+
+        <img src="{% static 'images/smartphone.png' %}"
+             alt="Smartphone"
+             class="hero-phone">
+
+        <img src="{% static 'images/headphones.png' %}"
+             alt="Headphones"
+             class="hero-headphones">
+
+        <img src="{% static 'images/smartwatch.png' %}"
+             alt="Smart Watch"
+             class="hero-watch">
+
+    </div>
+</div>
+
+</div>
+
+</section>
+<section class="categories-section" id="categories">
+    <div class="section-heading">
+        <h2>Categories</h2>
+    </div>
+
+   <div class="category-container">
+
+    <a href="/?category=electronics#products"
+       class="category-card">
+        <h3>Electronics</h3>
+        <p>Explore latest gadgets and devices.</p>
+    </a>
+
+    <a href="/?category=fashion#products"
+       class="category-card">
+        <h3>Fashion</h3>
+        <p>Discover stylish fashion products.</p>
+    </a>
+
+    <a href="/?category=accessories#products"
+       class="category-card">
+        <h3>Accessories</h3>
+        <p>Find accessories for everyday use.</p>
+    </a>
+
+</div>
+</section>
+
+
+<!-- Featured Products -->
+ {% if query %}
+    <p>Search results for: "{{ query }}"</p>
+{% endif %}
+<section class="products-section" id="products">
+
+    <div class="section-heading">
+        <h2>Featured Products</h2>
+        <a href="/#products" class="view-all">View All →</a>
+    </div>
+
+    
+<div class="product-container">
+
+    {% for product in products %}
+
+   <div class="product-card">
+
+    <a href="{% url 'product_detail' product.id %}" class="product-detail-link">
+        <div class="product-image">
+          <img src="{{ product.image.url }}"
+     alt="{{ product.name }}"
+     class="{% if product.name == 'Digital Camera' %}camera-image{% endif %}">
+        </div>
+    </a>
+
+    <div class="product-info">
+
+        <h3>
+            <a href="{% url 'product_detail' product.id %}" class="product-detail-link">
+                {{ product.name }}
+            </a>
+        </h3>
+            <p>{{ product.description }}</p>
+            <h4>Rs. {{ product.price }}</h4>
+           <form method="POST" action="{% url 'add_to_cart' product.id %}">
+    {% csrf_token %}
+    <button type="submit">Add to Cart</button>
+</form>
+        </div>
+
+    </div>
+
+    {% empty %}
+    <p>No products available yet.</p>
+
+    {% endfor %}
+
+</div>
+</section>
+<section class="about-section" id="about">
+    <h2>About NEXORA</h2>
+    <p>
+        Welcome to NEXORA! We bring you quality products
+        at affordable prices. Our goal is to make your
+        online shopping experience easy and enjoyable.
+    </p>
+</section>
+<section class="contact-section" id="contact">
+    <h2>Contact Us</h2>
+    <p>Have any questions? We would love to hear from you!</p>
+    <p>Email: support@nexora.com</p>
+</section>
+{% endblock %}

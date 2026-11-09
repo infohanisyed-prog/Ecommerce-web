@@ -1,0 +1,61 @@
+
+{% extends 'store/base.html' %}
+
+{% block title %}{{ product.name }} | NEXORA{% endblock %}
+
+{% block content %}
+
+<section class="product-detail-section">
+
+    <div class="product-detail-container">
+
+        <div class="detail-image">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        </div>
+
+        <div class="detail-info">
+
+            <span class="detail-label">Product Details</span>
+
+            <h1>{{ product.name }}</h1>
+
+            <p class="detail-description">
+                {{ product.description }}
+            </p>
+
+            <h2>Rs. {{ product.price }}</h2>
+
+            <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                {% csrf_token %}
+                <button type="submit" class="detail-cart-btn">
+                    Add to Cart 🛒
+                </button>
+            </form>
+       {% if is_in_wishlist %}
+
+    <button type="button" class="detail-wishlist-btn added" disabled>
+        Added to Wishlist ✓
+    </button>
+
+{% else %}
+
+    <form method="POST" action="{% url 'add_to_wishlist' product.id %}">
+        {% csrf_token %}
+        <button type="submit" class="detail-wishlist-btn">
+            Add to Wishlist ♡
+        </button>
+    </form>
+
+{% endif %}
+
+            <a href="/#products" class="back-products">
+                ← Back to Products
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

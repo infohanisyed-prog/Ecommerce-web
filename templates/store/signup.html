@@ -1,0 +1,75 @@
+
+{% extends 'store/base.html' %}
+
+{% block title %}Create Account | NEXORA{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-container">
+
+        <h1>Create Account</h1>
+        <p class="auth-subtitle">Join NEXORA and start shopping!</p>
+
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+
+           
+<div class="signup-field">
+
+    <label for="{{ form.username.id_for_label }}">Username</label>
+    {{ form.username }}
+
+   <small>
+    Choose a unique username 
+</small>
+
+    {{ form.username.errors }}
+
+</div>
+
+<div class="signup-field">
+
+    <label for="{{ form.password1.id_for_label }}">Password</label>
+    {{ form.password1 }}
+
+    <small>
+        Your password should:
+        <ul>
+            <li>Contain at least 8 characters,eg: Letters,numbers and special characters.</li>
+            <li>Include more than just numbers.</li>
+        </ul>
+    </small>
+
+    {{ form.password1.errors }}
+
+</div>
+
+<div class="signup-field">
+
+    <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+    {{ form.password2 }}
+
+    <small>Enter the same password again to confirm it.</small>
+
+    {{ form.password2.errors }}
+
+</div>
+
+
+            <button type="submit" class="auth-btn">
+                Create Account
+            </button>
+        </form>
+
+        <p class="auth-switch">
+            Already have an account?
+            <a href="{% url 'login' %}">Login</a>
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+
+{% extends 'store/base.html' %}
+
+{% block content %}
+
+<div class="wishlist-container">
+
+    <h1>My Wishlist</h1>
+    <p class="wishlist-subtitle">
+        Your favourite products saved in one place.
+    </p>
+
+    {% if wishlist_items %}
+
+        <div class="wishlist-grid">
+
+            {% for item in wishlist_items %}
+
+                <div class="wishlist-card">
+
+                    <a href="{% url 'product_detail' item.product.id %}">
+                        <div class="wishlist-image">
+                            <img src="{{ item.product.image.url }}"
+                                 alt="{{ item.product.name }}">
+                        </div>
+                    </a>
+
+                    <div class="wishlist-info">
+
+                        <h3>{{ item.product.name }}</h3>
+
+                        <p class="wishlist-price">
+                            Rs. {{ item.product.price }}
+                        </p>
+
+                        <a href="{% url 'product_detail' item.product.id %}"
+                           class="wishlist-view-btn">
+                            View Product
+                        </a>
+
+                        <a href="{% url 'remove_from_wishlist' item.product.id %}"
+                           class="wishlist-remove-btn">
+                            Remove from Wishlist
+                        </a>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-wishlist">
+            <h3>Your Wishlist is Empty!</h3>
+            <p>You haven't saved any products yet.</p>
+            <a href="{% url 'home' %}">Explore Products</a>
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

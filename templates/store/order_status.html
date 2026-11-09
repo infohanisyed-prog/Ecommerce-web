@@ -1,0 +1,52 @@
+
+{% extends 'store/base.html' %}
+
+{% block title %}Order Status | NEXORA{% endblock %}
+
+{% block content %}
+
+<div class="orders-container">
+
+    <h1>Order Status</h1>
+    <p class="orders-subtitle">
+        Track the current status of your orders.
+    </p>
+
+    {% if orders %}
+
+        {% for order in orders %}
+
+            <div class="order-card">
+
+                <div class="order-header">
+                    <h3>Order #{{ order.id }}</h3>
+                    <span class="order-status">{{ order.status }}</span>
+                </div>
+
+                <p>
+                    <strong>Order Date:</strong>
+                    {{ order.created_at|date:"d M Y, h:i A" }}
+                </p>
+
+                <div class="order-total">
+                    <strong>Total Amount:</strong>
+                    <strong>Rs. {{ order.total_amount }}</strong>
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty-orders">
+            <h3>No Orders Found!</h3>
+            <p>Your order status will appear here after placing an order.</p>
+            <a href="{% url 'home' %}">Continue Shopping</a>
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

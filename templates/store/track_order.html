@@ -1,0 +1,64 @@
+
+{% extends 'store/base.html' %}
+
+{% block title %}Track Your Order | NEXORA{% endblock %}
+
+{% block content %}
+
+<section class="tracking-section">
+
+    <div class="tracking-container">
+
+        <h1>Track Your Order</h1>
+        <p>Enter your order details to check your order status.</p>
+
+        <form method="POST" class="tracking-form">
+            {% csrf_token %}
+
+            <label>Order Number</label>
+            <input type="number" name="order_id"
+                   placeholder="Enter your order number" required>
+
+            <label>Email Address</label>
+            <input type="email" name="email"
+                   placeholder="Enter your email address" required>
+
+            <button type="submit">Track Order</button>
+        </form>
+
+        {% if error %}
+            <p class="tracking-error">
+                No order found. Please check your details.
+            </p>
+        {% endif %}
+
+        {% if order %}
+            <div class="tracking-result">
+
+                <h2>Order Found!</h2>
+
+                <p><strong>Order Number:</strong> #{{ order.id }}</p>
+
+                <p><strong>Customer:</strong> {{ order.customer_name }}</p>
+
+                <p><strong>Total Amount:</strong> Rs. {{ order.total_amount }}</p>
+
+                <p><strong>Order Date:</strong> {{ order.created_at|date:"d M Y" }}</p>
+
+                <div class="tracking-status">
+                    <span>Current Status</span>
+                    <strong>{{ order.status }}</strong>
+                </div>
+
+            </div>
+        {% endif %}
+
+        <a href="/#products" class="tracking-back">
+            ← Continue Shopping
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
