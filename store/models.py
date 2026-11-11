@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Product(models.Model):
@@ -106,5 +107,21 @@ class OrderItem(models.Model):
         decimal_places=2
     )
 
-    def __str__(self):
+def __str__(self):
         return f"{self.product.name} x {self.quantity}"
+
+
+class EmailOTP(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    otp = models.CharField(max_length=6)
+
+    created_at = models.DateTimeField(auto_now=True)
+
+    attempts = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"OTP for {self.user.username}"

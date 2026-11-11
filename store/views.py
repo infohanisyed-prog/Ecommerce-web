@@ -6,7 +6,15 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import ProfileUpdateForm
+from .forms import ProfileUpdateForm, CustomSignupForm
+import random
+from datetime import timedelta
+from django.contrib.auth.models import User
+from django.utils import timezone
+from django.core.mail import send_mail
+from django.contrib.auth import get_user_model
+from .models import EmailOTP
+from .forms import CustomSignupForm
 
 def get_cart_count(request):
     cart = request.session.get('cart', {})
@@ -221,20 +229,86 @@ def signup_view(request):
         return redirect('home')
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomSignupForm(request.POST)
 
         if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('home')
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+
+            otp = str(random.randint(100000, 999999))
+
+            EmailOTP.objects.update_or_create(
+                user=user,
+                defaults={
+                    'otp': otp,
+                    'created_at': timezone.now(),
+                    'attempts': 0
+                }
+            )
+
+            send_mail(
+                'NEXORA Email Verification OTP',
+                f'Your OTP is {otp}. It is valid for 5 minutes.',
+                None,
+                [user.email],
+                fail_silently=False,
+            )
+
+            request.session['otp_user_id'] = user.id
+
+            return redirect('verify_otp')
 
     else:
-        form = UserCreationForm()
+        form = CustomSignupForm()
 
     return render(request, 'store/signup.html', {
         'form': form,
     })
+def verify_otp_view(request):
 
+    user_id = request.session.get('otp_user_id')
+
+    if not user_id:
+        return redirect('signup')
+
+    user = get_object_or_404(User, id=user_id)
+
+    otp_record = EmailOTP.objects.filter(user=user).first()
+
+    if not otp_record:
+        return redirect('signup')
+
+    if timezone.now() - otp_record.created_at > timedelta(minutes=5):
+        otp_record.delete()
+        messages.error(request, 'OTP expired. Please sign up again.')
+        return redirect('signup')
+
+    if request.method == 'POST':
+
+        entered_otp = request.POST.get('otp', '').strip()
+
+        if otp_record.attempts >= 5:
+            messages.error(request, 'Too many attempts. Please sign up again.')
+            return redirect('signup')
+
+        otp_record.attempts += 1
+        otp_record.save(update_fields=['attempts'])
+
+        if entered_otp == otp_record.otp:
+
+            user.is_active = True
+            user.save(update_fields=['is_active'])
+
+            otp_record.delete()
+            request.session.pop('otp_user_id', None)
+
+            messages.success(request, 'Email verified! You can now log in.')
+            return redirect('login')
+
+        messages.error(request, 'Invalid OTP. Please try again.')
+
+    return render(request, 'store/verify_otp.html')
 
 # Login View
 def login_view(request):

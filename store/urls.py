@@ -26,6 +26,7 @@ path('wishlist/remove/<int:product_id>/', views.remove_from_wishlist, name='remo
 
 path('order-status/', views.order_status, name='order_status'),
 path('signup/', views.signup_view, name='signup'),
+path('verify-otp/', views.verify_otp_view, name='verify_otp'),
 path('login/', views.login_view, name='login'),
 path('logout/', views.logout_view, name='logout'),
 ]
